@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package social;
+
+import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
+
+service Auth {
+  rpc Register (RegisterRequest) returns (RegisterResponse) {
+    option (google.api.http) = {
+      post: "/register"
+    };
+  }
+
+  rpc Login (LoginRequest) returns (LoginResponse) {
+    option (google.api.http) = {
+      post: "/login"
+    };
+  }
+
+  rpc Me (MeRequest) returns (MeResponse) {
+    option (google.api.http) = {
+      get: "/me"
+    };
+  }
+
+  rpc VerifyEmail (VerifyEmailRequest) returns (VerifyEmailResponse) {
+    option (google.api.http) = {
+      get: "/verify"
+    };
+  }
+}
+
+message RegisterRequest {
+  string Username = 1;
+  string Email = 2;
+  string Password = 3;
+}
+
+message RegisterResponse {
+	string Error = 1;
+}
+
+message LoginRequest {
+  string Username = 1;
+  string Email = 2;
+  string Password = 3;
+}
+
+message LoginResponse {
+	string Error = 1;
+}
+
+message MeRequest {
+  string tokenStr = 1;
+}
+
+message MeResponse {
+	string Error = 1;
+}
+
+message VerifyEmailRequest {
+  string Email = 1;
+  string EmailToken = 2;
+}
+
+message VerifyEmailResponse {
+	string Error = 1;
+}
