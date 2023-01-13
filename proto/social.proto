@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package social;
 
+import "google/protobuf/timestamp.proto";
 import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
 
 service Social {
@@ -108,6 +109,6 @@ message UserProfile {
 	string About = 5;
 	string Banner = 6;
 	string Theme = 7;
-	Timestamp CreatedAt = 8;
-	Timestamp UpdatedAt = 9;
+	google.protobuf.Timestamp CreatedAt = 8;
+	google.protobuf.Timestamp UpdatedAt = 9;
 }
