@@ -1,0 +1,113 @@
+syntax = "proto3";
+
+package social;
+
+import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
+
+service Social {
+  rpc Profile (ProfileRequest) returns (ProfileResponse) {
+    option (google.api.http) = {
+      get: "/profile/{UserID}"
+    };
+  }
+
+  rpc UpdateProfile (UpdateProfileRequest) returns (UpdateProfileResponse) {
+    option (google.api.http) = {
+      post: "/profile/{UserID}"
+    };
+  }
+
+  rpc FriendList (FriendListRequest) returns (FriendListResponse) {
+    option (google.api.http) = {
+      get: "/friend/list"
+    };
+  }
+
+  rpc SendFriendRequest (SendFriendRequestRequest) returns (SendFriendRequestResponse) {
+    option (google.api.http) = {
+      post: "/friend/sendrequest"
+    };
+  }
+
+  rpc ReplyFriendRequest (ReplyFriendRequestRequest) returns (ReplyFriendRequestResponse) {
+    option (google.api.http) = {
+      post: "/friend/replyrequest"
+    };
+  }
+
+  rpc Block (BlockUserRequest) returns (BlockUserResponse) {
+    option (google.api.http) = {
+      post: "/friend/block"
+    };
+  }
+}
+
+message ProfileRequest {
+  int64 UserID = 1;
+}
+
+message ProfileResponse {
+  UserProfile Profile = 1;
+	string Error = 2;
+}
+
+message UpdateProfileRequest {
+  UserProfile Profile = 1;
+}
+
+message UpdateProfileResponse {
+  UserProfile Profile = 1;
+	string Error = 2;
+}
+
+message FriendListRequest {
+  int64 UserID = 1;
+}
+
+message FriendListResponse {
+  repeated UserProfile Profile = 1;
+	string Error = 2;
+}
+
+message SendFriendRequestRequest {
+  int64 SelfID = 1;
+  int64 FriendID = 2;
+}
+
+message SendFriendRequestResponse {
+  repeated UserProfile Profile = 1;
+	string Error = 2;
+}
+
+message ReplyFriendRequestRequest {
+  int64 SelfID = 1;
+  int64 FriendID = 2;
+	bool Accept = 3;
+}
+
+message ReplyFriendRequestResponse {
+  repeated UserProfile Profile = 1;
+	string Error = 2;
+}
+
+message BlockUserRequest {
+  int64 SelfID = 1;
+  int64 FriendID = 2;
+}
+
+message BlockUserResponse {
+  repeated UserProfile Profile = 1;
+	string Error = 2;
+}
+
+message UserProfile {
+	int64 UserID = 1;
+	string Nickname = 2;
+	string Tag = 3;
+	string Picture = 4;
+	string About = 5;
+	string Banner = 6;
+	string Theme = 7;
+	Timestamp CreatedAt = 8;
+	Timestamp UpdatedAt = 9;
+}
