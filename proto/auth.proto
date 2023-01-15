@@ -2,6 +2,7 @@ syntax = "proto3";
 
 package social;
 
+import "google/protobuf/timestamp.proto";
 import "github.com/metaverse/truss/deftree/googlethirdparty/annotations.proto";
 
 service Auth {
@@ -47,7 +48,8 @@ message LoginRequest {
 }
 
 message LoginResponse {
-	string Error = 1;
+  string Token = 1;
+	string Error = 2;
 }
 
 message MeRequest {
@@ -55,7 +57,8 @@ message MeRequest {
 }
 
 message MeResponse {
-	string Error = 1;
+  User User = 1;
+	string Error = 2;
 }
 
 message VerifyEmailRequest {
@@ -65,4 +68,14 @@ message VerifyEmailRequest {
 
 message VerifyEmailResponse {
 	string Error = 1;
+}
+
+message User {
+	int64 ID        = 1;
+	string Username  = 2;
+	string Email     = 3;
+	string Password  = 4;
+	string VerifyBy  = 5;
+	google.protobuf.Timestamp CreatedAt = 6;
+	google.protobuf.Timestamp UpdatedAt = 7;
 }
